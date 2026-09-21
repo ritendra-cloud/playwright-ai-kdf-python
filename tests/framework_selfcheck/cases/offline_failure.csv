@@ -1,0 +1,5 @@
+test_id,test_name,tags,keyword,target,value,description
+FAIL1,Deliberately broken locator,selfcheck,open_browser,,chromium,
+FAIL1,,,navigate,,${FAKE_URL},
+FAIL1,,,click,css=#does-not-exist,,This element is not on the page
+FAIL1,,,validate_visible,@fake.results,,Never reached

@@ -1,0 +1,8 @@
+name,locator,description
+orangehrm.username,"role=textbox[name=Username]",OrangeHRM Username input
+orangehrm.password,"role=textbox[name=Password]",OrangeHRM Password input
+orangehrm.login_button,"role=button[name=Login]",Submit the login form
+orangehrm.login_heading,"role=heading[name=Login]",Login-page heading
+orangehrm.dashboard_heading,"role=heading[name=Dashboard]",Authenticated dashboard heading
+orangehrm.login_alert,role=alert,Login failure alert
+orangehrm.required_messages,text=Required,Required-field validation messages

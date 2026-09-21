@@ -1,0 +1,4 @@
+test_id,test_name,tags,keyword,target,value,description
+SEED,Seed: OrangeHRM login page,seed,open_browser,,,Launch the browser
+SEED,,,navigate,,https://opensource-demo.orangehrmlive.com/web/index.php/auth/login,Open the OrangeHRM login page
+SEED,,,close_browser,,,Close the browser

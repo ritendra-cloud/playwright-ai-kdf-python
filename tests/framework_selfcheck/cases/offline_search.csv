@@ -1,0 +1,22 @@
+test_id,test_name,tags,keyword,target,value,description
+OFF1,Offline search flow (same keywords as the Google test),selfcheck,set_variable,TEXT,${env.SELFCHECK_TEXT:-hello world},
+OFF1,,,open_browser,,chromium,
+OFF1,,,navigate,,${FAKE_URL}?consent=1,
+OFF1,,,click_if_visible,@fake.consent_accept,,Dismiss consent
+OFF1,,,validate_hidden,@fake.consent_accept,,Consent is gone
+OFF1,,,validate,@fake.search_box,,
+OFF1,,,enter,@fake.search_box,${TEXT},
+OFF1,,,validate_value,@fake.search_box,${TEXT},
+OFF1,,,press_key,@fake.search_box,Enter,
+OFF1,,,wait_for,@fake.results,,
+OFF1,,,verify_url_contains,,/search,verify_* aliases work
+OFF1,,,validate_title_contains,,${TEXT},
+OFF1,,,validate_count,@fake.result_titles,4,
+OFF1,,,validate_count_at_least,@fake.result_titles,3,
+OFF1,,,validate_contains_ignore_case,@fake.results,HELLO WORLD,
+OFF1,,,store_text,css=#search h3 >> first,FIRST,
+OFF1,,,validate_page_contains,,${FIRST},
+OFF1,,,screenshot,,offline-results.png,
+OFF1,,,close_browser,,,
+OFF2,Second test in the same file starts from a fresh browser,selfcheck,navigate,,${FAKE_URL},No open_browser step: launched automatically
+OFF2,,,validate_hidden,@fake.results,,Fresh page has no results yet

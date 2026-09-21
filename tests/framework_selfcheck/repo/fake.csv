@@ -1,0 +1,5 @@
+name,locator,description
+fake.consent_accept,"role=button[name=Accept all]",Consent button
+fake.search_box,"css=textarea[name='q']",Search field
+fake.results,css=#search,Results container
+fake.result_titles,css=#search h3,Result headings

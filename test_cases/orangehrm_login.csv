@@ -1,0 +1,44 @@
+test_id,test_name,tags,keyword,target,value,description
+TC002,Administrator signs in with valid credentials,smoke;external,open_browser,,,Open a fresh browser
+TC002,,,navigate,,${config.base_url}/web/index.php/auth/login,Open the OrangeHRM login page
+TC002,,,validate_visible,@orangehrm.login_heading,,Login page is displayed
+TC002,,,enter,@orangehrm.username,${env.ORANGEHRM_USERNAME},Enter the configured valid test username
+TC002,,,enter_secret,@orangehrm.password,${env.ORANGEHRM_PASSWORD},Enter the configured valid test password
+TC002,,,click,@orangehrm.login_button,,Select Login
+TC002,,,wait_for,@orangehrm.dashboard_heading,,Wait for the authenticated dashboard
+TC002,,,validate_url_contains,,/dashboard/index,Dashboard route is displayed
+TC002,,,validate_visible,@orangehrm.dashboard_heading,,Dashboard heading is visible
+TC002,,,close_browser,,,Close the browser
+TC003,User cannot sign in with an invalid password,regression;external,open_browser,,,Open a fresh browser
+TC003,,,navigate,,${config.base_url}/web/index.php/auth/login,Open the OrangeHRM login page
+TC003,,,enter,@orangehrm.username,${env.ORANGEHRM_USERNAME},Enter the configured valid test username
+TC003,,,enter_secret,@orangehrm.password,invalid-password,Enter an invalid password
+TC003,,,click,@orangehrm.login_button,,Select Login
+TC003,,,wait_for,@orangehrm.login_alert,,Wait for the login error
+TC003,,,validate_contains,@orangehrm.login_alert,Invalid credentials,Invalid-credentials error is visible
+TC003,,,validate_url_contains,,/auth/login,User remains on the login page
+TC003,,,validate_visible,@orangehrm.login_heading,,Login page remains displayed
+TC003,,,close_browser,,,Close the browser
+TC004,Username is required,regression;external,open_browser,,,Open a fresh browser
+TC004,,,navigate,,${config.base_url}/web/index.php/auth/login,Open the OrangeHRM login page
+TC004,,,enter_secret,@orangehrm.password,not-used,Enter a non-empty password
+TC004,,,click,@orangehrm.login_button,,Submit without a username
+TC004,,,validate_count,@orangehrm.required_messages,1,One required-field validation is shown
+TC004,,,validate_url_contains,,/auth/login,User remains on the login page
+TC004,,,validate_visible,@orangehrm.login_heading,,Login page remains displayed
+TC004,,,close_browser,,,Close the browser
+TC005,Password is required,regression;external,open_browser,,,Open a fresh browser
+TC005,,,navigate,,${config.base_url}/web/index.php/auth/login,Open the OrangeHRM login page
+TC005,,,enter,@orangehrm.username,not-used,Enter a non-empty username
+TC005,,,click,@orangehrm.login_button,,Submit without a password
+TC005,,,validate_count,@orangehrm.required_messages,1,One required-field validation is shown
+TC005,,,validate_url_contains,,/auth/login,User remains on the login page
+TC005,,,validate_visible,@orangehrm.login_heading,,Login page remains displayed
+TC005,,,close_browser,,,Close the browser
+TC006,Both credentials are required,regression;external,open_browser,,,Open a fresh browser
+TC006,,,navigate,,${config.base_url}/web/index.php/auth/login,Open the OrangeHRM login page
+TC006,,,click,@orangehrm.login_button,,Submit with both credential fields empty
+TC006,,,validate_count,@orangehrm.required_messages,2,Both required-field validations are shown
+TC006,,,validate_url_contains,,/auth/login,User remains on the login page
+TC006,,,validate_visible,@orangehrm.login_heading,,Login page remains displayed
+TC006,,,close_browser,,,Close the browser

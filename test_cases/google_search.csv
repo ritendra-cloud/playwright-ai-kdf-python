@@ -1,0 +1,15 @@
+test_id,test_name,tags,keyword,target,value,description
+TC001,Google search returns relevant results,smoke;external,set_variable,SEARCH_TEXT,${env.SEARCH_TEXT:-Playwright Python},Text to search for (override: set env var SEARCH_TEXT)
+TC001,,,open_browser,,,Launch Chrome
+TC001,,,navigate,,https://www.google.com,Open Google
+TC001,,,click_if_visible,@google.consent_accept_all,,Dismiss the cookie consent pop-up if it appears
+TC001,,,validate_visible,@google.search_box,,Search box is displayed
+TC001,,,enter,@google.search_box,${SEARCH_TEXT},Type the search text
+TC001,,,press_key,@google.search_box,Enter,Submit the search
+TC001,,,wait_for,@google.results_container,,Results have loaded
+TC001,,,validate_url_contains,,/search,Now on the results page
+TC001,,,validate_title_contains,,${SEARCH_TEXT},Page title contains the search text
+TC001,,,validate_count_at_least,@google.result_titles,3,At least three results are listed
+TC001,,,validate_contains_ignore_case,@google.results_container,${SEARCH_TEXT},Results mention the search text
+TC001,,,screenshot,,google-results.png,Evidence of the results page
+TC001,,,close_browser,,,Close Chrome

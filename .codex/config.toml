@@ -1,0 +1,5 @@
+# Codex reads this file for trusted projects. If yours does not pick it up, register the server once with:
+#   codex mcp add playwright -- npx @playwright/mcp@latest
+[mcp_servers.playwright]
+command = "npx"
+args = ["@playwright/mcp@latest"]

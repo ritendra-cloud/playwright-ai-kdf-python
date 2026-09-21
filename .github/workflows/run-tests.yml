@@ -1,0 +1,40 @@
+name: Run keyword tests
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    env:
+      KDF_HEADLESS: "true"
+      KDF_CHANNEL: ""            # use Playwright's bundled Chromium in CI
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: pip install -r requirements.txt
+      - run: playwright install --with-deps chromium
+
+      - name: Validate CSV test data
+        run: python -m framework.cli validate
+
+      - name: Framework self-checks (offline)
+        run: pytest -m selfcheck
+
+      # Google is excluded in CI: datacenter IPs are usually served a CAPTCHA.
+      # Exit code 5 = "nothing collected", which is fine while every test is tagged 'external'.
+      - name: Keyword tests (not external)
+        run: pytest -m "not selfcheck and not external" || [ $? -eq 5 ]
+
+      - name: Upload reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: reports
+          path: reports

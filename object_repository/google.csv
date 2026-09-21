@@ -1,0 +1,7 @@
+name,locator,description
+google.consent_accept_all,"role=button[name=Accept all]",Cookie consent pop-up (mainly EU) - accept
+google.consent_reject_all,"role=button[name=Reject all]",Cookie consent pop-up (mainly EU) - reject
+google.search_box,"css=textarea[name='q'],input[name='q']",Main search field (Google uses a textarea today; the input covers older layouts)
+google.results_container,css=#search,Container that holds the organic search results
+google.result_titles,css=#search a h3,Clickable result headings
+google.first_result_title,css=#search a h3 >> first,Heading of the first organic result

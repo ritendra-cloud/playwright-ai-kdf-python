@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>Fake Search</title></head>
+<body>
+  <!-- Tiny offline stand-in for a search engine. Used only by the framework self-checks. -->
+  <div id="consent" role="dialog" aria-label="Cookies" hidden><button>Accept all</button></div>
+  <h1>Fake Search</h1>
+  <textarea name="q" aria-label="Search" rows="1"></textarea>
+  <div id="search" hidden></div>
+  <script>
+    const box = document.querySelector('textarea[name=q]');
+    const consent = document.getElementById('consent');
+    if (location.search.includes('consent=1')) {
+      consent.hidden = false;
+      consent.querySelector('button').onclick = () => { consent.hidden = true; };
+    }
+    box.addEventListener('keydown', (e) => {
+      if (e.key !== 'Enter') return;
+      e.preventDefault();
+      const text = box.value;
+      location.hash = '/search?q=' + encodeURIComponent(text);
+      document.title = text + ' - Fake Search';
+      const results = document.getElementById('search');
+      results.hidden = false;
+      results.innerHTML = [1, 2, 3, 4].map(
+        (i) => `<div><a href="#r${i}"><h3>${text} result ${i}</h3></a></div>`).join('');
+    });
+  </script>
+</body>
+</html>
